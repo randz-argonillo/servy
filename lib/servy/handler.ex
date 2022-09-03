@@ -9,7 +9,7 @@ defmodule Servy.Handler do
   def handle(request) do
     request
     |> Parser.parse()
-    |> Plugins.log()
+    # |> Plugins.log()
     |> Plugins.rewrite_path()
     |> route()
     |> Plugins.track_unknown()
@@ -20,6 +20,11 @@ defmodule Servy.Handler do
   def route(%Conv{method: "GET", path: "/kaboom"}) do
     raise 'Kaboom!'
   end
+
+  def route(%Conv{method: "GET", path: "/sensors"} = conv) do
+    BearController.get_sensors(conv)
+  end
+
   def route(%Conv{method: "GET", path: "/bears"} = conv) do
     BearController.index(conv)
   end
