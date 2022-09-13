@@ -4,6 +4,7 @@ defmodule Servy.Handler do
   alias Servy.FileHandler
   alias Servy.Conv
   alias Servy.BearController
+  alias Servy.PledgeController
   alias Servy.Api.BearController, as: ApiBearController
 
   def handle(request) do
@@ -21,7 +22,16 @@ defmodule Servy.Handler do
     raise 'Kaboom!'
   end
 
+  def route(%Conv{method: "GET", path: "/pledges"} = conv) do
+    PledgeController.index(conv)
+  end
+
+  def route(%Conv{method: "POST", path: "/pledges"} = conv) do
+    PledgeController.create(conv, conv.payload)
+  end
+
   def route(%Conv{method: "GET", path: "/sensors"} = conv) do
+    IO.puts("In route handler getting sensors")
     BearController.get_sensors(conv)
   end
 
