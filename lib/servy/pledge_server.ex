@@ -44,8 +44,9 @@ defmodule Servy.PledgeServer do
   end
 
   # Client
-  def start() do
-    GenServer.start(__MODULE__, %State{}, name: @server_name)
+  def start_link(_opts) do
+    IO.puts("Starting PledgeServer")
+    GenServer.start_link(__MODULE__, %State{}, name: @server_name)
   end
 
   def init(%State{} = state) do
