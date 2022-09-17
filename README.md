@@ -1,6 +1,9 @@
 # Servy
 
-**TODO: Add description**
+**How To run**
+* `mix deps.get`
+* `mix run`
+
 
 ## Installation
 
